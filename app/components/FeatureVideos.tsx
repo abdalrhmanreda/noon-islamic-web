@@ -209,7 +209,7 @@ export const FeatureVideos: React.FC = () => {
   return (
     <section
       id="feature-videos"
-      className="pt-28 pb-24 sm:pt-36 sm:pb-32 lg:pt-40 lg:pb-36 relative overflow-hidden section-bg"
+      className="pt-6 pb-20 sm:pt-10 sm:pb-24 lg:pt-12 lg:pb-28 relative overflow-hidden section-bg"
     >
       {/* Ambient background blurs */}
       <div
