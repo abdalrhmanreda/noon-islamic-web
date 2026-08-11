@@ -36,8 +36,8 @@ export const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
         <div className="flex items-center justify-between gap-2">
           
           {/* High-Contrast Logo */}
-          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-            <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white logo-badge-container p-1 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+          <a href="#" className="flex items-center gap-2 sm:gap-3 group shrink-0 min-w-0">
+            <div className="relative w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white logo-badge-container p-1 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300 shrink-0">
               <Image
                 src={yusrLogo}
                 alt="شعار تطبيق يُسْر - Yusr App Logo"
@@ -47,12 +47,12 @@ export const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
                 className="w-full h-full object-contain filter contrast-125"
               />
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg sm:text-2xl font-black tracking-tight flex items-center gap-1 font-serif">
+            <div className="flex flex-col min-w-0">
+              <span className="text-base sm:text-2xl font-black tracking-tight flex items-center gap-1 font-serif whitespace-nowrap">
                 تطبيق يُسْر
-                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 animate-pulse" />
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 animate-pulse shrink-0" />
               </span>
-              <span className="text-[10px] sm:text-xs font-medium opacity-80">Yusr App • رفيقك اليومي</span>
+              <span className="hidden sm:block text-[10px] sm:text-xs font-medium opacity-80 whitespace-nowrap">Yusr App • رفيقك اليومي</span>
             </div>
           </a>
 
