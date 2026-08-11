@@ -13,7 +13,7 @@ export const HeroSection: React.FC = () => {
   const androidUrl = "https://play.google.com/store/apps/details?id=com.nooralhuda.noor";
 
   return (
-    <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-36 overflow-hidden section-bg">
+    <section className="relative pt-28 pb-28 sm:pt-36 sm:pb-36 lg:pt-40 lg:pb-44 overflow-hidden section-bg">
       {/* Background Decorative Ambient Blur Elements */}
       <div className="absolute top-1/4 right-1/4 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-emerald-500/15 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none animate-pulse" />
       <div className="absolute top-1/3 left-1/4 w-[250px] sm:w-[450px] h-[250px] sm:h-[450px] bg-amber-500/10 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none" />
