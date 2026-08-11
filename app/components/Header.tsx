@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Search, Download, Moon, Sun, Menu, X, Sparkles, Apple } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import yusrLogo from '../../public/yusr_logo.png';
 
 interface HeaderProps {
   onSearchClick: () => void;
@@ -28,17 +29,17 @@ export const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'glass-nav py-3 shadow-2xl' : 'bg-transparent py-5'
+        scrolled ? 'glass-nav py-2.5 sm:py-3 shadow-2xl' : 'bg-transparent py-3 sm:py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           
           {/* High-Contrast Logo */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="relative w-12 h-12 rounded-2xl bg-white logo-badge-container p-1 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
+          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white logo-badge-container p-1 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform duration-300">
               <Image
-                src="/yusr_logo.png"
+                src={yusrLogo}
                 alt="شعار تطبيق يُسْر - Yusr App Logo"
                 width={44}
                 height={44}
@@ -47,11 +48,11 @@ export const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-2xl font-black tracking-tight flex items-center gap-1.5 font-serif">
+              <span className="text-lg sm:text-2xl font-black tracking-tight flex items-center gap-1 font-serif">
                 تطبيق يُسْر
-                <Sparkles className="w-4 h-4 text-amber-500 animate-pulse" />
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 animate-pulse" />
               </span>
-              <span className="text-xs font-medium opacity-80">Yusr App • رفيقك اليومي</span>
+              <span className="text-[10px] sm:text-xs font-medium opacity-80">Yusr App • رفيقك اليومي</span>
             </div>
           </a>
 
@@ -129,26 +130,29 @@ export const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
           </div>
 
           {/* Mobile Menu & Theme Button */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center gap-1.5">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg glass-card"
+              className="p-2 rounded-xl glass-card"
+              title="تغيير الثيم"
             >
-              {theme === 'dark' ? <Sun className="w-5 h-5 text-amber-400" /> : <Moon className="w-5 h-5 text-emerald-600" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-emerald-600" />}
             </button>
 
             <button
               onClick={onSearchClick}
-              className="p-2 rounded-lg glass-card"
+              className="p-2 rounded-xl glass-card"
+              title="بحث"
             >
-              <Search className="w-5 h-5 text-emerald-500" />
+              <Search className="w-4 h-4 text-emerald-500" />
             </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg glass-card"
+              className="p-2 rounded-xl glass-card text-themed-heading"
+              title="القائمة"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -156,46 +160,46 @@ export const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden glass-nav border-b px-4 py-4 mt-3 flex flex-col gap-3 animate-in slide-in-from-top duration-300">
+        <div className="md:hidden glass-nav border-b px-4 py-4 mt-2 flex flex-col gap-2 animate-in slide-in-from-top duration-300 shadow-2xl">
           <a
             href="#features"
             onClick={() => setMobileMenuOpen(false)}
-            className="px-4 py-3 font-medium rounded-xl hover:bg-black/5 dark:hover:bg-white/5"
+            className="px-4 py-2.5 font-medium text-sm rounded-xl hover:bg-black/5 dark:hover:bg-white/5 text-themed-heading"
           >
             المميزات الشاملة (40+)
           </a>
           <a
             href="#feature-videos"
             onClick={() => setMobileMenuOpen(false)}
-            className="px-4 py-3 font-medium rounded-xl hover:bg-black/5 dark:hover:bg-white/5"
+            className="px-4 py-2.5 font-medium text-sm rounded-xl hover:bg-black/5 dark:hover:bg-white/5 text-themed-heading"
           >
             الفيديوهات
           </a>
           <a
             href="#team"
             onClick={() => setMobileMenuOpen(false)}
-            className="px-4 py-3 font-medium rounded-xl hover:bg-black/5 dark:hover:bg-white/5"
+            className="px-4 py-2.5 font-medium text-sm rounded-xl hover:bg-black/5 dark:hover:bg-white/5 text-themed-heading"
           >
             فريق العمل
           </a>
-          <div className="grid grid-cols-2 gap-2 pt-2">
+          <div className="grid grid-cols-2 gap-2 pt-2 border-t border-themed">
             <a
               href={iosUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="glass-card text-amber-500 text-center font-semibold py-3 rounded-xl flex items-center justify-center gap-1 text-xs"
+              className="glass-card text-amber-500 text-center font-semibold py-2.5 rounded-xl flex items-center justify-center gap-1.5 text-xs"
             >
               <Apple className="w-4 h-4" />
-              <span>iOS (App Store)</span>
+              <span>App Store</span>
             </a>
             <a
               href={androidUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-emerald text-white text-center font-semibold py-3 rounded-xl flex items-center justify-center gap-1 text-xs shadow-lg"
+              className="bg-gradient-emerald text-white text-center font-semibold py-2.5 rounded-xl flex items-center justify-center gap-1.5 text-xs shadow-lg"
             >
               <Download className="w-4 h-4" />
-              <span>Android (Google Play)</span>
+              <span>Google Play</span>
             </a>
           </div>
         </div>

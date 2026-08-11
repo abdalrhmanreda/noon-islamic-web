@@ -86,7 +86,7 @@ export const TeamSection: React.FC = () => {
           {DEVELOPERS.map((dev) => (
             <div
               key={dev.id}
-              className="glass-card glass-card-hover rounded-3xl p-8 border border-themed-strong shadow-xl flex flex-col items-center text-center relative overflow-hidden group"
+              className="glass-card glass-card-hover rounded-3xl p-6 sm:p-8 border border-themed-strong shadow-xl flex flex-col items-center text-center relative overflow-hidden group"
             >
               {/* Top Accent Line */}
               <div className={`absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${dev.gradient}`} />
