@@ -324,7 +324,7 @@ export const FeatureVideos: React.FC = () => {
         {/* ========= THUMBNAIL STRIP ========= */}
         <div
           ref={thumbnailStripRef}
-          className="flex items-center gap-3 overflow-x-auto pb-3 px-2 snap-x snap-mandatory scroll-smooth scrollbar-hide"
+          className="flex items-center gap-3 overflow-x-auto pt-3 pb-4 px-3 snap-x snap-mandatory scroll-smooth scrollbar-hide"
           style={{ scrollbarWidth: 'none' }}
         >
           {FEATURE_VIDEOS.map((feat, idx) => {
@@ -347,7 +347,7 @@ export const FeatureVideos: React.FC = () => {
               >
                 {/* Active indicator dot */}
                 {isActive && (
-                  <span className={`absolute -top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full ${c.bg} animate-pulse`} />
+                  <span className={`absolute top-1.5 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full ${c.bg} animate-pulse`} />
                 )}
                 <Icon className={`w-6 h-6 transition-colors ${isActive ? c.text : 'text-themed-muted'}`} />
                 <span className="text-xs font-semibold whitespace-nowrap">{feat.title}</span>
