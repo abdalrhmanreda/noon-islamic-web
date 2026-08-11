@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Heart, Sparkles, Download, ShieldCheck, Apple, Smartphone } from 'lucide-react';
+import yusrLogo from '../../public/yusr_logo.png';
 
 export const Footer: React.FC = () => {
   const iosUrl = "https://apps.apple.com/eg/app/%D9%8A%D8%B3%D8%B1-yusr/id6759193445";
@@ -18,7 +19,7 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-2xl bg-white logo-badge-container p-1 flex items-center justify-center shadow-lg">
                 <Image
-                  src="/yusr_logo.png"
+                  src={yusrLogo}
                   alt="شعار يُسْر"
                   width={44}
                   height={44}

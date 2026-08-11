@@ -1,8 +1,12 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { Code2, Users, ExternalLink } from 'lucide-react';
+
+import devAbdalrhman from '../../public/developer_abdalrhman.jpg';
+import devEslam from '../../public/developer_eslam.png';
+import devMohammed from '../../public/developer_mohammed.jpg';
 
 interface Developer {
   id: string;
@@ -10,7 +14,7 @@ interface Developer {
   nameEn: string;
   roleEn: string;
   linkedin: string;
-  imageSrc: string;
+  imageSrc: StaticImageData;
   gradient: string;
 }
 
@@ -32,7 +36,7 @@ const DEVELOPERS: Developer[] = [
     nameEn: 'Abdalrhman Reda',
     roleEn: 'Full-Stack Mobile & Backend Engineer',
     linkedin: 'https://www.linkedin.com/in/abdalrhman-reda-b24a11226/',
-    imageSrc: '/developer_abdalrhman.jpg',
+    imageSrc: devAbdalrhman,
     gradient: 'from-emerald-500 to-teal-600',
   },
   {
@@ -41,7 +45,7 @@ const DEVELOPERS: Developer[] = [
     nameEn: 'Eslam Aped',
     roleEn: 'Full-Stack Mobile & Backend Engineer',
     linkedin: 'https://www.linkedin.com/in/eslamaped/',
-    imageSrc: '/developer_eslam.png',
+    imageSrc: devEslam,
     gradient: 'from-amber-500 to-orange-600',
   },
   {
@@ -50,7 +54,7 @@ const DEVELOPERS: Developer[] = [
     nameEn: 'Mohammed Rageh',
     roleEn: 'Full-Stack Mobile & Backend Engineer',
     linkedin: 'https://www.linkedin.com/in/mohammedrageh/?locale=en',
-    imageSrc: '/developer_mohammed.jpg',
+    imageSrc: devMohammed,
     gradient: 'from-blue-500 to-indigo-600',
   },
 ];

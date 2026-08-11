@@ -3,6 +3,10 @@
 import React from 'react';
 import Image from 'next/image';
 import { Download, Sparkles, CheckCircle2, Star, Play, Apple, Smartphone, ShieldCheck, Heart } from 'lucide-react';
+import yusrLogo from '../../public/yusr_logo.png';
+import yusrAppQuran from '../../public/yusr_app_quran.png';
+import yusrAppHome from '../../public/yusr_app_home.png';
+import yusrAppTafseer from '../../public/yusr_app_tafseer.png';
 
 export const HeroSection: React.FC = () => {
   const iosUrl = "https://apps.apple.com/eg/app/%D9%8A%D8%B3%D8%B1-yusr/id6759193445";
@@ -30,7 +34,7 @@ export const HeroSection: React.FC = () => {
             <div className="flex items-center gap-4 mb-4">
               <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-white logo-badge-container p-1.5 flex items-center justify-center shadow-2xl shrink-0">
                 <Image
-                  src="/yusr_logo.png"
+                  src={yusrLogo}
                   alt="شعار يُسْر"
                   width={75}
                   height={75}
@@ -145,7 +149,7 @@ export const HeroSection: React.FC = () => {
               {/* Image 1: Left - Quran Screen */}
               <div className="absolute -left-2 sm:left-2 top-8 w-44 sm:w-56 aspect-[9/19] rounded-[28px] sm:rounded-[36px] shadow-2xl transform -rotate-6 hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500 z-10 overflow-hidden">
                 <Image
-                  src="/yusr_app_quran.png"
+                  src={yusrAppQuran}
                   alt="المصحف الشريف بالخط العثماني"
                   fill
                   sizes="(max-width: 640px) 180px, 230px"
@@ -156,7 +160,7 @@ export const HeroSection: React.FC = () => {
               {/* Image 2: Center (Featured) - Main Home Screen */}
               <div className="absolute z-20 w-48 sm:w-60 aspect-[9/19] rounded-[30px] sm:rounded-[38px] shadow-2xl shadow-emerald-950/40 transform hover:scale-105 transition-all duration-500 overflow-hidden">
                 <Image
-                  src="/yusr_app_home.png"
+                  src={yusrAppHome}
                   alt="واجهة تطبيق يُسْر الرئيسية ومواقيت الصلاة"
                   fill
                   priority
@@ -168,7 +172,7 @@ export const HeroSection: React.FC = () => {
               {/* Image 3: Right - Tafseer Screen */}
               <div className="absolute -right-2 sm:right-2 top-8 w-44 sm:w-56 aspect-[9/19] rounded-[28px] sm:rounded-[36px] shadow-2xl transform rotate-6 hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500 z-10 overflow-hidden">
                 <Image
-                  src="/yusr_app_tafseer.png"
+                  src={yusrAppTafseer}
                   alt="التفسير المباشر لآيات القرآن"
                   fill
                   sizes="(max-width: 640px) 180px, 230px"
