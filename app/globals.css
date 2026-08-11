@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-cairo: 'Cairo', sans-serif;
+    --font-amiri: 'Amiri', serif;
+  }
+}
+
+/* ====== Dark Mode Styles ====== */
+html.dark {
+  --bg-main: #080c14;
+  --bg-section: #080c14;
+  --bg-section-alt: #0d1527;
+  --bg-card: rgba(15, 23, 42, 0.75);
+  --bg-card-hover: rgba(30, 41, 59, 0.85);
+  --bg-input: rgba(255, 255, 255, 0.05);
+  --text-main: #f3f4f6;
+  --text-heading: #ffffff;
+  --text-sub: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-color-strong: rgba(255, 255, 255, 0.15);
+  --nav-bg: rgba(8, 12, 20, 0.85);
+  --overlay-bg: rgba(0, 0, 0, 0.8);
+  --badge-bg: rgba(255, 255, 255, 0.05);
+}
+
+/* ====== Light Mode Styles ====== */
+html.light {
+  --bg-main: #f8fafc;
+  --bg-section: #f8fafc;
+  --bg-section-alt: #f1f5f9;
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-card-hover: #ffffff;
+  --bg-input: rgba(15, 23, 42, 0.05);
+  --text-main: #0f172a;
+  --text-heading: #0f172a;
+  --text-sub: #334155;
+  --text-muted: #64748b;
+  --border-color: rgba(15, 23, 42, 0.1);
+  --border-color-strong: rgba(15, 23, 42, 0.15);
+  --nav-bg: rgba(248, 250, 252, 0.9);
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --badge-bg: rgba(15, 23, 42, 0.05);
+}
+
+body {
+  font-family: var(--font-cairo), system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/* ====== Section Background ====== */
+.section-bg {
+  background-color: var(--bg-section);
+  transition: background-color 0.3s ease;
+}
+
+.section-bg-alt {
+  background-color: var(--bg-section-alt);
+  transition: background-color 0.3s ease;
+}
+
+/* ====== Glassmorphism Cards ====== */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  background: var(--bg-card-hover);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 20px 30px -10px rgba(16, 185, 129, 0.18);
+}
+
+.glass-nav {
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* ====== Themed Text Utilities ====== */
+.text-themed-heading {
+  color: var(--text-heading);
+}
+
+.text-themed-main {
+  color: var(--text-main);
+}
+
+.text-themed-sub {
+  color: var(--text-sub);
+}
+
+.text-themed-muted {
+  color: var(--text-muted);
+}
+
+/* ====== Themed Border ====== */
+.border-themed {
+  border-color: var(--border-color);
+}
+
+.border-themed-strong {
+  border-color: var(--border-color-strong);
+}
+
+/* ====== Themed Input ====== */
+.input-themed {
+  background: var(--bg-input);
+  border: 1px solid var(--border-color-strong);
+  color: var(--text-main);
+}
+
+.input-themed:focus {
+  outline: none;
+}
+
+/* ====== Themed Badges ====== */
+.badge-bg-themed {
+  background: var(--badge-bg);
+}
+
+/* ====== High-Contrast Logo Badge ====== */
+.logo-badge-container {
+  background: #ffffff;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4), inset 0 0 10px rgba(245, 158, 11, 0.2);
+  border: 2px solid #10b981;
+}
+
+html.light .logo-badge-container {
+  background: #f0fdf4;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+  border: 2px solid #059669;
+}
+
+/* ====== Text Gradients ====== */
+.text-gradient-emerald {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.light .text-gradient-emerald {
+  background: linear-gradient(135deg, #059669 0%, #047857 50%, #065f46 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html.light .text-gradient-gold {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 50%, #78350f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ====== Background Gradients ====== */
+.bg-gradient-emerald {
+  background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+}
+
+.bg-gradient-gold {
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+}
+
+/* ====== Scrollbar ====== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: #10b981;
+  border-radius: 4px;
+}
+
+/* ====== Scrollbar Hide Utility ====== */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
