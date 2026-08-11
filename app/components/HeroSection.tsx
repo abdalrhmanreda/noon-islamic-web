@@ -138,13 +138,13 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Left Column: Clean Raw Screenshots Showcase */}
-          <div className="lg:col-span-6 relative flex justify-center items-center py-4 sm:py-6">
+          <div className="lg:col-span-6 relative flex justify-center items-center py-4 sm:py-6 overflow-hidden max-w-full">
             
             {/* Ambient Background Glow */}
             <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 via-amber-500/15 to-emerald-600/20 rounded-full blur-3xl transform scale-110 pointer-events-none" />
 
             {/* Overlapping Raw App Screenshots Layout */}
-            <div className="relative w-full max-w-xs sm:max-w-lg h-[360px] xs:h-[420px] sm:h-[540px] flex items-center justify-center">
+            <div className="relative w-full max-w-[280px] xs:max-w-xs sm:max-w-lg h-[340px] xs:h-[420px] sm:h-[540px] flex items-center justify-center">
               
               {/* Image 1: Left - Quran Screen */}
               <div className="absolute -left-1 xs:left-0 sm:left-2 top-4 sm:top-8 w-32 xs:w-36 sm:w-56 aspect-[9/19] rounded-[20px] xs:rounded-[24px] sm:rounded-[36px] shadow-2xl transform -rotate-6 hover:rotate-0 hover:z-30 hover:scale-105 transition-all duration-500 z-10 overflow-hidden">

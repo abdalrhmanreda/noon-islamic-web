@@ -129,11 +129,11 @@ export const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
             </a>
           </div>
 
-          {/* Mobile Menu & Theme Button */}
-          <div className="flex md:hidden items-center gap-1.5">
+          {/* Mobile Action Bar (Sleek Compact Glass Pill) */}
+          <div className="flex md:hidden items-center p-0.5 rounded-2xl glass-card border border-themed shrink-0">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-xl glass-card"
+              className="p-2 rounded-xl text-themed-sub hover:text-themed-heading transition-colors"
               title="تغيير الثيم"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-emerald-600" />}
@@ -141,18 +141,20 @@ export const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
 
             <button
               onClick={onSearchClick}
-              className="p-2 rounded-xl glass-card"
+              className="p-2 rounded-xl text-themed-sub hover:text-themed-heading transition-colors"
               title="بحث"
             >
               <Search className="w-4 h-4 text-emerald-500" />
             </button>
 
+            <div className="w-px h-4 bg-[var(--border-color)] my-auto" />
+
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl glass-card text-themed-heading"
+              className="p-2 rounded-xl text-themed-heading transition-colors"
               title="القائمة"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <X className="w-4 h-4 text-emerald-500" /> : <Menu className="w-4 h-4" />}
             </button>
           </div>
         </div>
