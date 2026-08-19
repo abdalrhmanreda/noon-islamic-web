@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوستر تطبيق يُسْر (Yusr) — أبيض وأسود</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Cairo:wght@400;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Renders via SVG <foreignObject> so the browser shapes Arabic text itself.
+       html2canvas draws glyph-by-glyph and breaks RTL ligatures. -->
+  <script src="https://cdn.jsdelivr.net/npm/modern-screenshot@4/dist/index.js"></script>
+
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .font-quran {
+      font-family: 'Amiri', serif;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 8mm;
+    }
+
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+
+      html,
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      #poster {
+        width: 100% !important;
+        max-width: 190mm !important;
+        max-height: 275mm !important;
+        margin: 0 auto !important;
+        padding: 24px 28px !important;
+        box-shadow: none !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        border: 1.5px solid #d4d4d8 !important;
+        border-radius: 28px !important;
+      }
+
+      /* Printers rasterize blurs as solid blocks: neutralize every
+         shadow / filter / translucency inside the poster. */
+      #poster *,
+      #poster *::before,
+      #poster *::after {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        filter: none !important;
+        -webkit-filter: none !important;
+        backdrop-filter: none !important;
+        opacity: 1 !important;
+        animation: none !important;
+        transition: none !important;
+      }
+
+      #poster .poster-accent {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-zinc-100 text-zinc-900 min-h-screen py-10 px-4 flex flex-col items-center justify-center">
+
+  <!-- Control Bar (Hidden from print) -->
+  <div
+    class="no-print print:hidden max-w-4xl w-full flex flex-wrap items-center justify-between gap-4 mb-8 bg-white p-4 rounded-2xl border border-zinc-300 shadow-xl">
+    <div>
+      <h2 class="text-base sm:text-lg font-black text-zinc-900 flex items-center gap-2">
+        <span>🎨 مصمم بوستر تطبيق يُسْر (White & Black)</span>
+      </h2>
+      <p class="text-xs text-zinc-500">تصميم فاخر باللونين الأبيض والأسود عالي التباين والدقة</p>
+    </div>
+
+    <!-- Orientation Switcher -->
+    <button onclick="toggleLandscape()" id="btn-orient"
+      class="bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold px-3.5 py-2.5 rounded-xl border border-zinc-300 transition flex items-center gap-1.5">
+      <span>🖼️ وضع العرض (Landscape)</span>
+    </button>
+
+    <!-- Swap Images Button -->
+    <button onclick="swapMockups()"
+      class="bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold px-3.5 py-2.5 rounded-xl border border-zinc-300 transition flex items-center gap-1.5">
+      <span>🔄 تبديل الصور</span>
+    </button>
+
+    <!-- Theme Switcher -->
+    <button onclick="toggleMode()" id="btn-mode"
+      class="bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold px-4 py-2.5 rounded-xl border border-zinc-300 transition">
+      🌙 الوضع الأسود
+    </button>
+
+    <!-- Print Button -->
+    <button onclick="printPoster()" id="btn-print"
+      class="bg-zinc-900 hover:bg-black text-white text-xs font-black px-5 py-2.5 rounded-xl shadow-md flex items-center gap-2 transition transform active:scale-95 disabled:opacity-60 disabled:cursor-wait">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+      </svg>
+      <span>طباعة / حفظ PDF</span>
+    </button>
+
+    <!-- Download PNG Button -->
+    <button onclick="downloadPoster()" id="btn-download"
+      class="bg-emerald-600 hover:bg-emerald-500 text-white font-black px-5 py-2.5 rounded-xl shadow-lg flex items-center gap-2 transition transform active:scale-95 text-xs">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+      </svg>
+      <span>تحميل PNG</span>
+    </button>
+  </div>
+  </div>
+
+  <!-- THE WHITE & BLACK POSTER (Exact Match to Reference) -->
+  <div id="poster"
+    class="relative w-full max-w-[850px] aspect-square rounded-[36px] overflow-hidden p-10 sm:p-12 shadow-2xl border-2 border-zinc-300 bg-white text-black flex flex-col justify-between transition-colors duration-300">
+
+    <!-- Minimalist Border Frames -->
+    <div id="frame-1" class="absolute inset-4 sm:inset-5 border border-zinc-200 rounded-2xl pointer-events-none"></div>
+    <div id="frame-2" class="absolute inset-6 sm:inset-7 border border-zinc-100 rounded-xl pointer-events-none"></div>
+
+    <!-- Header -->
+    <div class="relative z-10 flex items-center justify-between">
+      <!-- Ratings & Trust on the Right in RTL -->
+      <div class="text-right flex flex-col items-start">
+        <div class="text-black text-sm tracking-widest font-bold">★★★★★</div>
+        <span class="text-xs text-zinc-500 font-bold mt-1">تقييم 4.9 • خالي من الإعلانات 100%</span>
+      </div>
+
+      <!-- App Name & Logo on the Left in RTL -->
+      <div class="flex items-center gap-4">
+        <div class="text-left">
+          <div id="badge-pill"
+            class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-zinc-100 border border-zinc-300 text-zinc-800 text-xs font-bold mb-1 whitespace-nowrap">
+            <span>✦ «الدَّالُّ عَلَى الخَيْرِ كَفَاعِلِهِ»</span>
+          </div>
+          <h1 id="title-text"
+            class="text-3xl sm:text-4xl font-black text-black tracking-tight flex items-center gap-2 justify-end">
+            <span class="font-serif text-2xl sm:text-3xl font-light text-zinc-500">Yusr —</span>
+            <span>تطبيق يُسْر</span>
+          </h1>
+        </div>
+
+        <!-- High-Clarity Crisp Logo -->
+        <div id="logo-box"
+          class="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-3xl p-2 shadow-xl flex items-center justify-center border-2 border-zinc-200 shrink-0">
+          <img id="logo-img" src="/yusr_logo.png" alt="Logo" class="w-full h-full object-contain filter contrast-110">
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="relative z-10 grid grid-cols-12 gap-6 items-center my-auto">
+
+      <!-- Left Column: Phone Mockups Showcase -->
+      <div
+        class="col-span-5 relative flex items-center justify-center h-[340px] sm:h-[400px] w-full cursor-pointer select-none py-2 px-1"
+        onclick="swapMockups()" title="انقر لتبديل الصور">
+        <!-- Secondary Phone in the BACK (Home Screen - Tilted Right) -->
+        <div id="phone-sub"
+          class="absolute right-1 sm:right-3 top-4 sm:top-6 w-36 sm:w-44 aspect-[9/19] rounded-[24px] sm:rounded-[28px] overflow-hidden border-2 border-zinc-300 shadow-2xl transform rotate-8 z-10 opacity-85 transition-all duration-500 hover:opacity-100 hover:rotate-4 bg-zinc-100">
+          <img id="img-sub" src="/yusr_app_home.png" alt="Home Screen" class="w-full h-full object-cover">
+        </div>
+        <!-- Main Phone in FRONT (Quran Screen) -->
+        <div id="phone-main"
+          class="relative left-4 sm:left-6 w-40 sm:w-48 aspect-[9/19] rounded-[28px] sm:rounded-[32px] overflow-hidden border-[3.5px] border-zinc-900 shadow-2xl z-20 transition-transform duration-500 hover:scale-105 bg-white">
+          <img id="img-main" src="/yusr_app_quran.png" alt="Quran Screen" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <!-- Right Column: Details & QR Codes -->
+      <div class="col-span-7 flex flex-col gap-4 text-right">
+        <div>
+          <h2 id="heading-sub" class="text-2xl sm:text-3xl font-black text-zinc-900 font-quran mb-1">
+            رفيقك اليومي للقرآن والأذكار ومواقيت الصلاة 🌙
+          </h2>
+          <p id="desc-text" class="text-xs sm:text-sm text-zinc-500 leading-relaxed font-normal">
+            تطبيق إسلامي شامل مصمم بواجهة حديثة وفائقة السرعة، بدون أي إعلانات، ويعمل بالكامل بدون الحاجة لإنترنت.
+          </p>
+        </div>
+
+        <!-- 4 Grid Feature Pills -->
+        <div class="grid grid-cols-2 gap-2.5">
+          <div id="pill-1"
+            class="bg-zinc-50 border border-zinc-200 text-zinc-800 rounded-xl p-2.5 flex items-center justify-between">
+            <span class="text-xs font-bold">📖 مصحف عثماني وتفسير</span>
+          </div>
+          <div id="pill-2"
+            class="bg-zinc-50 border border-zinc-200 text-zinc-800 rounded-xl p-2.5 flex items-center justify-between">
+            <span class="text-xs font-bold">🧭 مواقيت وأذان وقبلة</span>
+          </div>
+          <div id="pill-3"
+            class="bg-zinc-50 border border-zinc-200 text-zinc-800 rounded-xl p-2.5 flex items-center justify-between">
+            <span class="text-xs font-bold">🛡️ بدون إعلانات إطلاقاً</span>
+          </div>
+          <div id="pill-4"
+            class="bg-zinc-50 border border-zinc-200 text-zinc-800 rounded-xl p-2.5 flex items-center justify-between">
+            <span class="text-xs font-bold">📶 عمل كامل بدون نت</span>
+          </div>
+        </div>
+
+        <!-- Monochrome QR Codes Box -->
+        <div id="qr-box"
+          class="bg-zinc-100 border border-zinc-300 rounded-2xl p-4 flex items-center justify-around gap-4 shadow-sm">
+
+          <!-- Google Play QR -->
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 bg-white rounded-xl p-1 shadow-sm border border-zinc-300 mb-1.5 overflow-hidden">
+              <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://play.google.com/store/apps/details?id=com.nooralhuda.noor&margin=6&color=000000"
+                alt="Google Play QR" class="w-full h-full object-contain" crossorigin="anonymous">
+            </div>
+            <div id="qr-label-2" class="text-[11px] font-black text-zinc-900 flex items-center gap-1">
+              <span>Google Play (Android) 📱</span>
+            </div>
+          </div>
+
+          <div id="qr-divider" class="w-px h-16 bg-zinc-300"></div>
+
+          <!-- App Store QR -->
+          <div class="flex flex-col items-center">
+            <div class="w-20 h-20 bg-white rounded-xl p-1 shadow-sm border border-zinc-300 mb-1.5 overflow-hidden">
+              <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://apps.apple.com/eg/app/%D9%8A%D8%B3%D8%B1-yusr/id6759193445&margin=6&color=000000"
+                alt="App Store QR" class="w-full h-full object-contain" crossorigin="anonymous">
+            </div>
+            <div id="qr-label-1" class="text-[11px] font-black text-zinc-900 flex items-center gap-1">
+              <span>App Store (iOS) 🍏</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div id="poster-footer"
+      class="relative z-10 pt-4 border-t border-zinc-200 flex items-center justify-between text-xs text-zinc-600 font-bold">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-black"></span>
+        <span>تطبيق يُسْر • صدقة جارية ومجاني بالكامل</span>
+      </div>
+      <span id="footer-callout" class="text-black font-extrabold">امسح الكود وحمّل التطبيق الآن 📲</span>
+    </div>
+
+  </div>
+
+  <script>
+    let isWhiteMode = true;
+    let isSwapped = true;
+
+    function toggleMode() {
+      isWhiteMode = !isWhiteMode;
+      const poster = document.getElementById('poster');
+      const btnMode = document.getElementById('btn-mode');
+      const frame1 = document.getElementById('frame-1');
+      const frame2 = document.getElementById('frame-2');
+      const logoBox = document.getElementById('logo-box');
+      const badgePill = document.getElementById('badge-pill');
+      const titleText = document.getElementById('title-text');
+      const headingSub = document.getElementById('heading-sub');
+      const descText = document.getElementById('desc-text');
+      const pills = [document.getElementById('pill-1'), document.getElementById('pill-2'), document.getElementById('pill-3'), document.getElementById('pill-4')];
+      const qrBox = document.getElementById('qr-box');
+      const qrLabel1 = document.getElementById('qr-label-1');
+      const qrLabel2 = document.getElementById('qr-label-2');
+      const qrDivider = document.getElementById('qr-divider');
+      const phoneMain = document.getElementById('phone-main');
+      const phoneSub = document.getElementById('phone-sub');
+      const footer = document.getElementById('poster-footer');
+      const footerCallout = document.getElementById('footer-callout');
+
+      if (isWhiteMode) {
+        poster.className = poster.className.replace('bg-black text-white border-zinc-800', 'bg-white text-black border-zinc-300');
+        frame1.className = 'absolute inset-4 sm:inset-5 border border-zinc-200 rounded-2xl pointer-events-none';
+        frame2.className = 'absolute inset-6 sm:inset-7 border border-zinc-100 rounded-xl pointer-events-none';
+        logoBox.className = 'w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-3xl p-2 shadow-xl flex items-center justify-center border-2 border-zinc-200 shrink-0';
+        badgePill.className = 'inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-zinc-100 border border-zinc-300 text-zinc-800 text-xs font-bold mb-1 whitespace-nowrap';
+        titleText.className = 'text-3xl sm:text-4xl font-black text-black tracking-tight flex items-center gap-2 justify-end';
+        headingSub.className = 'text-2xl sm:text-3xl font-black text-zinc-900 font-quran mb-1';
+        descText.className = 'text-xs sm:text-sm text-zinc-500 leading-relaxed font-normal';
+        pills.forEach(p => p.className = 'bg-zinc-50 border border-zinc-200 text-zinc-800 rounded-xl p-2.5 flex items-center justify-between');
+        qrBox.className = 'bg-zinc-100 border border-zinc-300 rounded-2xl p-4 flex items-center justify-around gap-4 shadow-sm';
+        qrLabel1.className = 'text-[11px] font-black text-zinc-900 flex items-center gap-1';
+        qrLabel2.className = 'text-[11px] font-black text-zinc-900 flex items-center gap-1';
+        qrDivider.className = 'w-px h-16 bg-zinc-300';
+        phoneMain.className = 'relative left-4 sm:left-6 w-40 sm:w-48 aspect-[9/19] rounded-[28px] sm:rounded-[32px] overflow-hidden border-[3.5px] border-zinc-900 shadow-2xl z-20 transition-transform duration-500 hover:scale-105 bg-white';
+        phoneSub.className = 'absolute right-1 sm:right-3 top-4 sm:top-6 w-36 sm:w-44 aspect-[9/19] rounded-[24px] sm:rounded-[28px] overflow-hidden border-2 border-zinc-300 shadow-2xl transform rotate-8 z-10 opacity-85 transition-all duration-500 hover:opacity-100 hover:rotate-4 bg-zinc-100';
+        footer.className = 'relative z-10 pt-4 border-t border-zinc-200 flex items-center justify-between text-xs text-zinc-600 font-bold';
+        footerCallout.className = 'text-black font-extrabold';
+        btnMode.innerText = '🌙 الوضع الأسود';
+      } else {
+        poster.className = poster.className.replace('bg-white text-black border-zinc-300', 'bg-black text-white border-zinc-800');
+        frame1.className = 'absolute inset-4 sm:inset-5 border border-zinc-800 rounded-2xl pointer-events-none';
+        frame2.className = 'absolute inset-6 sm:inset-7 border border-zinc-900 rounded-xl pointer-events-none';
+        logoBox.className = 'w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-3xl p-2 shadow-xl flex items-center justify-center border-2 border-zinc-700 shrink-0';
+        badgePill.className = 'inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs font-bold mb-1 whitespace-nowrap';
+        titleText.className = 'text-3xl sm:text-4xl font-black text-white tracking-tight flex items-center gap-2 justify-end';
+        headingSub.className = 'text-2xl sm:text-3xl font-black text-zinc-100 font-quran mb-1';
+        descText.className = 'text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal';
+        pills.forEach(p => p.className = 'bg-zinc-950 border border-zinc-800 text-zinc-200 rounded-xl p-2.5 flex items-center justify-between');
+        qrBox.className = 'bg-zinc-950 border border-zinc-800 rounded-2xl p-4 flex items-center justify-around gap-4 shadow-xl';
+        qrLabel1.className = 'text-[11px] font-black text-white flex items-center gap-1';
+        qrLabel2.className = 'text-[11px] font-black text-white flex items-center gap-1';
+        qrDivider.className = 'w-px h-16 bg-zinc-800';
+        phoneMain.className = 'relative left-4 sm:left-6 w-40 sm:w-48 aspect-[9/19] rounded-[28px] sm:rounded-[32px] overflow-hidden border-[3.5px] border-zinc-600 shadow-2xl z-20 transition-transform duration-500 hover:scale-105 bg-zinc-950';
+        phoneSub.className = 'absolute right-1 sm:right-3 top-4 sm:top-6 w-36 sm:w-44 aspect-[9/19] rounded-[24px] sm:rounded-[28px] overflow-hidden border-2 border-zinc-700 shadow-2xl transform rotate-8 z-10 opacity-80 transition-all duration-500 hover:opacity-100 hover:rotate-4 bg-zinc-900';
+        footer.className = 'relative z-10 pt-4 border-t border-zinc-800 flex items-center justify-between text-xs text-zinc-400 font-bold';
+        footerCallout.className = 'text-white font-extrabold';
+        btnMode.innerText = '☀️ الوضع الأبيض';
+      }
+    }
+
+    let isLandscape = false;
+
+    // @page can only be changed by injecting CSS, so the print sheet
+    // follows the on-screen orientation toggle.
+    const pageStyle = document.createElement('style');
+    document.head.appendChild(pageStyle);
+    function applyPageOrientation() {
+      pageStyle.textContent = isLandscape
+        ? '@page { size: A4 landscape; margin: 8mm; }' +
+        '@media print { #poster { max-width: 275mm !important; max-height: 180mm !important; } }'
+        : '@page { size: A4 portrait; margin: 8mm; }' +
+        '@media print { #poster { max-width: 190mm !important; max-height: 275mm !important; } }';
+    }
+    applyPageOrientation();
+
+    function toggleLandscape() {
+      isLandscape = !isLandscape;
+      applyPageOrientation();
+      const poster = document.getElementById('poster');
+      const btnOrient = document.getElementById('btn-orient');
+      const phoneMain = document.getElementById('phone-main');
+      const phoneSub = document.getElementById('phone-sub');
+      const mockupContainer = phoneMain.parentElement;
+
+      if (isLandscape) {
+        poster.style.maxWidth = '1000px';
+        poster.style.aspectRatio = '16/9';
+        btnOrient.innerText = '🖼️ الوضع المربع (1:1)';
+        mockupContainer.className = 'col-span-5 relative flex flex-row items-center justify-center gap-3 sm:gap-4 h-[340px] sm:h-[400px] w-full select-none py-2 px-1';
+        phoneMain.className = 'relative w-36 sm:w-44 aspect-[9/19] rounded-[26px] sm:rounded-[30px] overflow-hidden border-[3px] ' + (isWhiteMode ? 'border-zinc-800 bg-white shadow-zinc-400' : 'border-zinc-700 bg-zinc-950 shadow-black') + ' shadow-2xl transition-all duration-300 hover:scale-105';
+        phoneSub.className = 'relative w-36 sm:w-44 aspect-[9/19] rounded-[26px] sm:rounded-[30px] overflow-hidden border-[3px] ' + (isWhiteMode ? 'border-zinc-800 bg-white shadow-zinc-400' : 'border-zinc-700 bg-zinc-950 shadow-black') + ' shadow-2xl transition-all duration-300 hover:scale-105';
+        phoneSub.style.transform = 'none';
+        phoneSub.style.position = 'relative';
+        phoneSub.style.right = 'auto';
+        phoneSub.style.top = 'auto';
+      } else {
+        poster.style.maxWidth = '850px';
+        poster.style.aspectRatio = '1/1';
+        btnOrient.innerText = '🖼️ وضع العرض (Landscape)';
+        mockupContainer.className = 'col-span-5 relative flex items-center justify-center h-[340px] sm:h-[400px] w-full cursor-pointer select-none py-2 px-1';
+        phoneMain.className = 'relative left-4 sm:left-6 w-40 sm:w-48 aspect-[9/19] rounded-[28px] sm:rounded-[32px] overflow-hidden border-[3.5px] ' + (isWhiteMode ? 'border-zinc-900 bg-white' : 'border-zinc-600 bg-zinc-950') + ' shadow-2xl z-20 transition-transform duration-500 hover:scale-105';
+        phoneSub.className = 'absolute right-1 sm:right-3 top-4 sm:top-6 w-36 sm:w-44 aspect-[9/19] rounded-[24px] sm:rounded-[28px] overflow-hidden border-2 ' + (isWhiteMode ? 'border-zinc-300 bg-zinc-100' : 'border-zinc-700 bg-zinc-900') + ' shadow-2xl transform rotate-8 z-10 opacity-85 transition-all duration-500 hover:opacity-100 hover:rotate-4';
+        phoneSub.style.transform = '';
+        phoneSub.style.position = '';
+        phoneSub.style.right = '';
+        phoneSub.style.top = '';
+      }
+    }
+
+    // Two posters per printed sheet, stacked for cutting.
+    const COPIES_PER_PAGE = 2;
+    const COPY_GAP = '6mm';
+
+    // Print a high-resolution raster of the live DOM so the sheet matches
+    // the screen exactly, instead of re-rendering the CSS in the print engine.
+    function printSnapshot(dataUrl) {
+      const frame = document.createElement('iframe');
+      frame.setAttribute('aria-hidden', 'true');
+      frame.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;';
+      document.body.appendChild(frame);
+
+      const doc = frame.contentDocument;
+      // Two copies stacked on one sheet, each capped at half the page height.
+      doc.open();
+      doc.write(
+        '<!DOCTYPE html><html><head><meta charset="utf-8"><style>' +
+        '@page { size: A4 ' + (isLandscape ? 'landscape' : 'portrait') + '; margin: 8mm; }' +
+        'html,body{margin:0;padding:0;height:100%;}' +
+        'body{display:flex;flex-direction:column;align-items:center;' +
+        'justify-content:center;gap:' + COPY_GAP + ';height:100%;}' +
+        'img{max-width:100%;max-height:calc((100% - ' + COPY_GAP + ') / ' + COPIES_PER_PAGE + ');' +
+        'display:block;object-fit:contain;' +
+        '-webkit-print-color-adjust:exact;print-color-adjust:exact;}' +
+        '</style></head><body></body></html>'
+      );
+      doc.close();
+
+      let loaded = 0;
+      function onEach() {
+        if (++loaded < COPIES_PER_PAGE) return;
+        frame.contentWindow.focus();
+        frame.contentWindow.print();
+        setTimeout(function () { frame.remove(); }, 3000);
+      }
+
+      for (let i = 0; i < COPIES_PER_PAGE; i++) {
+        const img = doc.createElement('img');
+        img.onload = onEach;
+        img.onerror = onEach;
+        img.src = dataUrl;
+        doc.body.appendChild(img);
+      }
+    }
+
+    let isPrinting = false;
+    async function printPoster() {
+      if (isPrinting) return;
+      isPrinting = true;
+      const btn = document.getElementById('btn-print');
+      const original = btn.innerHTML;
+      btn.innerHTML = '<span>\u062C\u0627\u0631\u064A \u0627\u0644\u062A\u062D\u0636\u064A\u0631... \u23F3</span>';
+      btn.disabled = true;
+
+      try {
+        if (document.fonts && document.fonts.ready) await document.fonts.ready;
+        const dataUrl = await modernScreenshot.domToPng(document.getElementById('poster'), {
+          scale: 3,
+          backgroundColor: isWhiteMode ? '#ffffff' : '#000000',
+          fetch: { requestInit: { mode: 'cors', cache: 'force-cache' } }
+        });
+        printSnapshot(dataUrl);
+      } catch (err) {
+        console.error('Snapshot print failed, falling back to CSS print:', err);
+        window.print();
+      } finally {
+        btn.innerHTML = original;
+        btn.disabled = false;
+        isPrinting = false;
+      }
+    }
+
+    async function downloadPoster() {
+      const btn = document.getElementById('btn-download');
+      btn.innerText = 'جاري المعالجة... ⏳';
+      btn.disabled = true;
+
+      try {
+        const posterEl = document.getElementById('poster');
+        const image = await modernScreenshot.domToPng(posterEl, {
+          scale: 3,
+          backgroundColor: isWhiteMode ? '#ffffff' : '#000000',
+          fetch: { requestInit: { mode: 'cors', cache: 'force-cache' } }
+        });
+
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = isWhiteMode ? 'Yusr-Poster-White.png' : 'Yusr-Poster-Black.png';
+        link.click();
+      } catch (err) {
+        console.error(err);
+        alert('حدث خطأ أثناء تحميل الصورة');
+      } finally {
+        btn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span>تحميل PNG</span>
+        `;
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+
+</html>

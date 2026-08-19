@@ -82,6 +82,12 @@ export const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
             >
               التحميل
             </a>
+            <a
+              href="/poster"
+              className="px-3.5 py-1.5 text-xs font-bold text-zinc-900 dark:text-zinc-100 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 transition-all rounded-full border border-black/10 dark:border-white/15 flex items-center gap-1.5"
+            >
+              <span>بوستر التطبيق (B&W)</span>
+            </a>
           </nav>
 
           {/* Action Buttons & Theme Switcher */}
@@ -183,6 +189,14 @@ export const Header: React.FC<HeaderProps> = ({ onSearchClick }) => {
             className="px-4 py-2.5 font-medium text-sm rounded-xl hover:bg-black/5 dark:hover:bg-white/5 text-themed-heading"
           >
             فريق العمل
+          </a>
+          <a
+            href="/poster"
+            onClick={() => setMobileMenuOpen(false)}
+            className="px-4 py-2.5 font-bold text-sm rounded-xl bg-black/5 dark:bg-white/10 text-themed-heading flex items-center justify-between"
+          >
+            <span>بوستر التطبيق (White & Black)</span>
+            <span className="text-xs opacity-60">جديد ✦</span>
           </a>
           <div className="grid grid-cols-2 gap-2 pt-2 border-t border-themed">
             <a
